@@ -1,0 +1,25 @@
+{
+    "name": "aienming/holiday-m",
+    "description": "'节假日管理'",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xuxiaoming",
+            "email": "aienming@163.com"
+        }
+    ],
+    "require": {
+        
+    },
+    "autoload": {
+        "psr-4": {
+            "Aienming\\HolidayManage\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aienming\\HolidayManage\\Tests\\": "tests/"
+        }
+    }
+}
