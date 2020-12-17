@@ -163,7 +163,7 @@ class HolidayManage
      */
     protected function convertLieuDayToArray(String $lieuDay)
     {
-        return explode(',', $lieuDay);
+        return explode('，', $lieuDay);
     }
 
     /**
