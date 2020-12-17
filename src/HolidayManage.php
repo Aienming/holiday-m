@@ -5,7 +5,6 @@ namespace Aienming\HolidayManage;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Aienming\HolidayManage\Models\Holiday;
-use Illuminate\Support\Facades\DB;
 
 /**
  * 节假日管理服务
