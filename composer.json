@@ -21,5 +21,15 @@
         "psr-4": {
             "Aienming\\HolidayManage\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Aienming\\HolidayManage\\HolidayServiceProvider"
+            ],
+            "aliases": {
+                "HolidayM": "Aienming\\HolidayManage\\Facades\\HolidayManage"
+            }
+        }
     }
 }
