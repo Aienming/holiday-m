@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
  * Class HolidayManage
  * @package Aienming\HolidayManage\Facades
  */
-class HolidayManage extends Facade {
+class HolidayM extends Facade {
 
     protected static function getFacadeAccessor()
     {

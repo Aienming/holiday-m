@@ -1,9 +1,21 @@
 # holiday-m
 一个关于节假日管理的东东
 
+### 安装
+```$shell
+$ composer require Aienming/Holiday-m
+
+# 发布服务
+$ php artisan vendor:publish --provider="Aienming/HolidayManage/HolidayServiceProvider.php"
+
+# 迁移数据表
+$ php artisan migrate
+```
+
+
 ### 相关操作
 - 判断某一日期是否为工作日
-```$xslt
+```$php
 use HolidayM
 
 HolidayM::isWorkDay('2020-12-15');   // 返回bool值，true表示是工作日

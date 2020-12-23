@@ -5,7 +5,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "xuxiaoming",
+            "name": "Aienming",
             "email": "aienming@163.com"
         }
     ],
@@ -28,7 +28,7 @@
                 "Aienming\\HolidayManage\\HolidayServiceProvider"
             ],
             "aliases": {
-                "HolidayM": "Aienming\\HolidayManage\\Facades\\HolidayManage"
+                "HolidayM": "Aienming\\HolidayManage\\Facades\\HolidayM"
             }
         }
     }
