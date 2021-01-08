@@ -5,7 +5,7 @@
 ```$shell
 $ composer require Aienming/Holiday-m
 
-# 发布服务
+# 发布服务(laravel5.7以后会自动发现服务，可以略过此步)
 $ php artisan vendor:publish --provider="Aienming/HolidayManage/HolidayServiceProvider.php"
 
 # 迁移数据表
