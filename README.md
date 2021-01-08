@@ -29,19 +29,58 @@ HolidayM::numberOfWorkDay('2020-12-15', '2020-12-31');  // 返回int。注：计
 ```
 
 - 增删改节假日
-```$php
-use HolidayM
-// $start和$end对应的是数据表中start和end字段，是节假日的开始和结束日期
-// $params为数据表中的其他字段，其中lieuDay使用的是中文逗号“，”来分隔不同日期
-// $id为可选参数，id存在时表示为更新操作
-// 返回格式：
-//          [
-//              'result' => false,                                  // 操作是否成功
-//              'error' => '该节假日和调休日冲突，不允许添加！',    // 错误提示
-//              'data'  => obj                                       // 成功时返回的模型
-//          ]
-HolidayM::createOrUpdate($start, $end, $params[, $id]);     // 返回array
 
-HolidayM::del($id);     // 返回bool
-```
+    **添加和编辑节假日：**
+    
+    参数：
+    
+    |参数 | 必须 | 类型 | 说明 |
+    |:--- | :--- | :--- | :--- |
+    |start | 是 | string | 开始日，格式：Y-m-d |
+    |end | 是 | string | 结束日，格式：Y-m-d |
+    |params['holiday'] | 否 | 节假日名称，不传显示默认字符 | 
+    |params['lieuDay'] | 否 | 调休日，多个调休日期需以中文逗号('，')分割 | 
+    |params['remark'] | 否 | 备注说明 |
+    |id | 否 | int | 节假日id，携带时为更新操作 |
+    
+    ```$php
+    use HolidayM;
+    
+    HolidayM::createOrUpdate($start, $end, $params[, $id]);     // 返回array
+    // 返回格式：
+    //          [
+    //              'result' => false,                                  // 操作是否成功
+    //              'error' => '该节假日和调休日冲突，不允许添加！',    // 错误提示
+    //              'data'  => obj                                       // 成功时返回的模型
+    //          ]
+    
+    ```
+    - 获取已设置的节假日
+    
+    参数：
+        
+        |参数 | 必须 | 类型 | 说明 |
+        |:--- | :--- | :--- | :--- |
+        |keyWord | 否 | string | 节假日名字搜索 |
+        |year | 否 | string | 年份条件 |
+        |pageP['page'] | 否 | 分页之第几页 | 
+        |pageP['per_page'] | 否 | 分页之每页数量 |
+        
+        ```$php
+        use HolidayM;
+        
+        HolidayM::getHolidayList($keyWord, $year, $pageP);     // 返回array
+        // 返回格式：
+        //          [
+        //              'total' => 0,                                  // 查询到的数量
+        //              'data' => [],                           // 已设置的节假日数据
+        //          ]
+        
+        ```
+    - 删除已设置的节假日
+    ```$php
+    use HolidayM;
+    
+    HolidayM::del($id);     // 返回bool
+    ```
 

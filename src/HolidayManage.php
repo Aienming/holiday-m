@@ -220,7 +220,7 @@ class HolidayManage
                 ],
                 [
                     'holiday' => $params['holiday'],
-                    'remark' => $params['remark'],
+                    'remark' => isset($params['remark']) ? $params['remark'] : '',
                     'start' => $start,
                     'end'   => $end,
                     'lieuDay' => $params['lieuDay']
@@ -229,7 +229,7 @@ class HolidayManage
 
             return ['result'=>true,'data' => $holiday];
         } catch (\Exception $e) {
-            return ['result'=>false,'error' => $e];
+            return ['result'=>false,'error' => $e->getMessage()];
         }
 
     }
@@ -242,13 +242,56 @@ class HolidayManage
      * @author xuxiaoming
      * @datetime 2020/12/10 11:22
      */
-    public function del(Request $request)
+    public function del($id)
     {
         try {
-            Holiday::destroy($request->id);
+            Holiday::destroy($id);
             return true;
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * 获取节假日列表
+     *
+     * @param bool $keyWord
+     * @param bool $year
+     * @param bool $pageP
+     * @return mixed
+     * @author xuxiaoming
+     * @datetime 2021/1/8 10:22
+     */
+    public static function getHolidayList($keyWord=false, $year=false, $pageP=false)
+    {
+        $res = ['result' => true];
+        try {
+            $takePage = $pageP && isset($pageP['page']) && isset($pageP['per_page']) ? true : false;
+
+            $build = Holiday::when($keyWord, function($query) use($keyWord) {
+                return $query->where('holiday', 'like', '%' . $keyWord . '%');
+            })->when($year, function($query) use($year) {
+                return $query->where(function($q) use($year) {
+                    return $q->whereYear('start', $year);
+                })->orWhere(function($q) use($year) {
+                    return $q->whereYear('end', $year);
+                });
+            });
+
+            $list['total'] = $build->count();
+            $list['data'] = $build->when($takePage, function($query) use($pageP) {
+                return $query->offset(($pageP['page'] -1) * $pageP['per_page'])
+                    ->limit($pageP['page']);
+            })
+                ->get()
+                ->toArray();
+
+            $res['data'] = $list;
+
+        } catch (\Exception $e) {
+            $res['result'] = false;
+            $res['error'] = $e->getMessage();
+        }
+        return $res;
     }
 }
